@@ -1,0 +1,287 @@
+/* Global Styles */
+/* body {
+  margin: 0;
+  background-image: url(../assets/body.jpg);
+  background: linear-gradient(300deg, hsl(321, 100%, 86%), hsl(335, 92%, 85%)), url no-repeat center center;
+  background-size: cover, cover;
+} */
+
+.dashboard {
+  background: linear-gradient(300deg, hsl(321, 100%, 86%), hsl(335, 92%, 85%));
+  min-height: 100vh;
+  position: relative; /* agar pseudo-element bisa diposisikan absolut di dalamnya */
+  width: 100%;
+  height: 100%;
+  --color: #faa7d8;
+  background: linear-gradient(45deg, var(--color) 25%, transparent 25%) -50px 0, linear-gradient(-45deg, var(--color) 25%, transparent 25%) -50px 0, linear-gradient(45deg, transparent 75%, var(--color) 75%) -50px 0,
+    linear-gradient(-45deg, transparent 75%, var(--color) 75%) -50px 0;
+  background-color: #e5e5f7;
+  background-size: 10px 40px;
+}
+
+/* body {
+  /* margin: 0; */
+/* font-family: Arial, sans-serif; */
+/* background-color: #000; */
+*/
+
+/* Dashboard Wrapper */
+.dashboard {
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 20px;
+  margin-bottom: 100px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header Styles */
+.header {
+  background: linear-gradient(135deg, hsl(321, 100%, 50%), hsl(335, 92%, 85%));
+  text-align: center;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  /* margin: 0 auto; */
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%; /* Changed from 110% to 100% */
+  z-index: 1000; /* pastikan di atas elemen lain */
+  padding: 20px;
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 0 0 10px 10px; /* opsional, untuk tampilan modern */
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Glass Icons Section */
+.glass-container {
+  padding: 20px;
+  margin-top: 80px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.glass-container .glass {
+  position: relative;
+  width: 150px;
+  height: 100px;
+  background: linear-gradient(#fff2, transparent);
+  border: 1px solid rgba(255, 0, 230, 0.673);
+  box-shadow: 0 25px 25px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  border-radius: 10px;
+  margin: 0 -45px;
+  backdrop-filter: blur(50px);
+  transform: rotate(calc(var(--r) * 1deg));
+}
+
+.glass-container:hover .glass {
+  transform: rotate(0deg);
+  margin: 0 10px;
+}
+
+.glass-container .glass::before {
+  content: attr(data-text);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.glass-container .glass svg {
+  font-size: 2.5em;
+  fill: #fff;
+}
+
+.glass:hover {
+  transform: scale(4.4) rotate(0deg);
+  box-shadow: 0 30px 30px rgba(74, 69, 72, 0.7);
+}
+
+/* Recipe Grid Container */
+.grid-container {
+  margin-top: 0px;
+  /* background-color: hsl(305, 85%, 87%); */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 40px;
+  padding: 40px;
+  /* border-radius: 10px; */
+  /* box-shadow: 5px 5px 15px rgba(0.5, 0.5, 0.5, 0.8); */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Grid Item */
+.grid-item {
+  /* border: 1px solid #ddd; */
+  padding: 20px;
+  text-align: center;
+  background-color: #ffc1c8ef;
+  border-radius: 50px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.grid-item:hover {
+  transform: scale(1.05);
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Recipe Image */
+.gambar-resep {
+  width: 60%;
+  height: auto;
+  transition: transform 0.3s ease-in-out;
+  transform: perspective(1000px) rotateY(10deg) rotateX(10deg);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.grid-item:hover .gambar-resep {
+  transform: perspective(1000px) rotateY(-10deg) rotateX(-10deg) scale(1.1);
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Text Styles */
+p {
+  color: #333;
+  font-size: 14px;
+}
+
+.item-h3 {
+  font-size: 30px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+  }
+}
+
+/* Button CSS */
+button {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  vertical-align: middle;
+  text-decoration: none;
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+button.learn-more {
+  width: 12rem;
+  height: auto;
+}
+
+button.learn-more .circle {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: relative;
+  display: block;
+  margin: 0;
+  width: 3rem;
+  height: 3rem;
+  background: #de00aa98;
+  border-radius: 1.625rem;
+}
+
+button.learn-more .circle .icon {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background: #626262;
+}
+
+button.learn-more .circle .icon.arrow {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  left: 0.625rem;
+  width: 1.125rem;
+  height: 0.125rem;
+  background: #626262;
+}
+
+button.learn-more .circle .icon.arrow::before {
+  position: absolute;
+  content: "";
+  top: -0.29rem;
+  right: 0.0625rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-top: 0.125rem solid #626262;
+  border-right: 0.125rem solid #626262;
+  transform: rotate(45deg);
+}
+
+button.learn-more .button-text {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.75rem 0;
+  margin: 0 0 0 3rem;
+  color: #404040;
+  font-weight: 700;
+  line-height: 1.6;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+button:hover .circle {
+  width: 110%;
+}
+
+button:hover .circle .icon.arrow {
+  background: #626262;
+  transform: translate(1rem, 0);
+}
+
+button:hover .button-text {
+  color: #fdfdfd;
+}
+
+.footer {
+  width: 100%;
+  padding: 20px;
+  height: fit-content;
+  background: linear-gradient(135deg, hsl(0, 0%, 100%), hsl(335, 92%, 85%));
+  color: #000000;
+  text-align: center;
+  font-size: 16px;
+  /* position: fixed; */
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+}
