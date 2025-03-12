@@ -23,12 +23,12 @@ function Dashboard() {
       {/* Header */}
       <header className="header">Meilia Recipe Collection 👩🏻‍🍳</header>
 
-        {/* Tombol untuk menambahkan resep baru */}
+        {/* Tombol untuk menambahkan resep baru
         <div className="tambah-resep">
         <button onClick={() => navigate("/add")}>
           Tambah Resep Baru
         </button>
-      </div>
+      </div> */}
 
       {/* Glass Icons Section */}
       <div className="glass-container">
