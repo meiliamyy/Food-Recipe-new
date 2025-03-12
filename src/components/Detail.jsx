@@ -1,15 +1,36 @@
 import { useParams, useNavigate } from "react-router-dom";
-import resepData from "../data/resepData";
+import { useState, useEffect } from "react";
+// import resepData from "../data/resepData";
 import "./Detail.css"; // buat file CSS sesuai kebutuhan
 
 function Detail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const resep = resepData.find((item) => item.id === parseInt(id));
+  const [resep, setResep] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  if (!resep) {
-    return <div>Resep tidak ditemukan</div>;
-  }
+  useEffect(() => {
+    fetch(`http://localhost:5000/recipes/${id}`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setResep(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, [id]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!resep) return <div>Resep tidak ditemukan</div>;
 
   return (
     <>

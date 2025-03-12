@@ -1,9 +1,18 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import resepData from "../data/resepData";
+// import resepData from "../data/resepData";
 import "./Dashboard.css"; // buat file CSS sesuai kebutuhan
 
 function Dashboard() {
+  const [resepData, setResepData] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch("http://localhost:5000/recipes")
+      .then((res) => res.json())
+      .then((data) => setResepData(data))
+      .catch((err) => console.error(err));
+  }, []);
 
   const handleKlikResep = (id) => {
     navigate(`/detail/${id}`);
