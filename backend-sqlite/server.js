@@ -1,7 +1,9 @@
 //import modul 
-const express = require('express');
-const sqlite3 = require('sqlite3').verbose();
-const cors = require('cors');
+import express from 'express';
+import sqlite3Module from 'sqlite3';
+import cors from 'cors';
+
+const sqlite3 = sqlite3Module.verbose();
 
 //inisialisasi aplikasi
 const app = express();

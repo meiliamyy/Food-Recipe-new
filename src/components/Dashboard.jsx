@@ -5,13 +5,25 @@ import "./Dashboard.css"; // buat file CSS sesuai kebutuhan
 
 function Dashboard() {
   const [resepData, setResepData] = useState([]);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:5000/recipes")
-      .then((res) => res.json())
-      .then((data) => setResepData(data))
-      .catch((err) => console.error(err));
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Terjadi kesalahan pada respon: " + res.status);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Data dari API:", data);
+        setResepData(data);
+      })
+      .catch((err) => {
+        console.error("Error fetching data:", err);
+        setError(err.message);
+      });
   }, []);
 
   const handleKlikResep = (id) => {
@@ -22,13 +34,6 @@ function Dashboard() {
     <div className="dashboard">
       {/* Header */}
       <header className="header">Meilia Recipe Collection 👩🏻‍🍳</header>
-
-        {/* Tombol untuk menambahkan resep baru
-        <div className="tambah-resep">
-        <button onClick={() => navigate("/add")}>
-          Tambah Resep Baru
-        </button>
-      </div> */}
 
       {/* Glass Icons Section */}
       <div className="glass-container">
@@ -61,22 +66,31 @@ function Dashboard() {
         </a>
       </div>
 
-      {/* Recipe Grid Section */}
-      <div className="grid-container">
-        {resepData.map((resep) => (
-          <div key={resep.id} className="grid-item">
-            <img src={resep.gambar} alt={resep.nama} className="gambar-resep" />
-            <h3 className="item-h3">{resep.nama}</h3>
-            {/* <p>{resep.kategori}</p> */}
-            <button className="learn-more" onClick={() => handleKlikResep(resep.id)}>
-              <span className="circle" aria-hidden="true">
-                <span className="icon arrow"></span>
-              </span>
-              <span className="button-text">Resep Lengkap</span>
-            </button>
-          </div>
-        ))}
-      </div>
+        {/* Menampilkan pesan error jika terjadi */}
+        {error && <p style={{ color: "red", textAlign: "center" }}>Error: {error}</p>}
+
+        {/* Menampilkan pesan jika data kosong */}
+        {resepData.length === 0 ? (
+          <p style={{ textAlign: "center" }}>Belum ada resep. Silahkan tambahkan resep terlebih dahulu.</p>
+        ) : (
+              /* Recipe Grid Section */
+              <div className="grid-container">
+                {resepData.map((resep) => (
+                  <div key={resep.id} className="grid-item">
+                    <img src={resep.gambar} alt={resep.nama} className="gambar-resep" />
+                    <h3 className="item-h3">{resep.nama}</h3>
+                    {/* <p>{resep.kategori}</p> */}
+                    <button className="learn-more" onClick={() => handleKlikResep(resep.id)}>
+                      <span className="circle" aria-hidden="true">
+                        <span className="icon arrow"></span>
+                      </span>
+                      <span className="button-text">Resep Lengkap</span>
+                    </button>
+                  </div>
+                ))}
+              </div>)}
+
+
       <footer className="footer">
         <p>&copy; 2025 Meilia Recipe Collection. All rights reserved.</p>
       </footer>

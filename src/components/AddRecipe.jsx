@@ -1,6 +1,7 @@
+// AddRecipe.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import "./AddRecipe.css"; // Buat file CSS sesuai kebutuhan styling
+import "./AddRecipe.css"; // Jika sudah membuat file CSS khusus
 
 function AddRecipe() {
   const [nama, setNama] = useState("");
@@ -36,7 +37,7 @@ function AddRecipe() {
         return res.json();
       })
       .then(() => {
-        // Setelah berhasil, arahkan kembali ke Dashboard atau ke halaman detail resep baru
+        // Setelah berhasil, arahkan kembali ke Dashboard agar data baru muncul
         navigate("/");
       })
       .catch((err) => {
