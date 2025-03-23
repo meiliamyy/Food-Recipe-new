@@ -1,29 +1,37 @@
-// AddRecipe.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-{/* <Link to="/add-recipe">Tambah Resep</Link> */}
-import "./AddRecipe.css"; // Jika sudah membuat file CSS khusus
+import "./AddRecipe.css";
+
 
 function AddRecipe() {
   const [nama, setNama] = useState("");
   const [kategori, setKategori] = useState("");
   const [gambar, setGambar] = useState(null);
+  const [gambarPreview, setGambarPreview] = useState(null);
   const [bahan, setBahan] = useState("");
   const [cara, setCara] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  // Update file and preview when file input changes
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setGambar(file);
+    if (file) {
+      setGambarPreview(URL.createObjectURL(file));
+    } else {
+      setGambarPreview(null);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
+    // Create FormData instance
+    const formData = new FormData();
     const bahanArray = bahan.split("\n").filter((item) => item.trim() !== "");
     const caraArray = cara.split("\n").filter((item) => item.trim() !== "");
-    
-    formData.append("bahan", JSON.stringify(bahanArray));
-    formData.append("cara", JSON.stringify(caraArray));
-    
-  
-    const formData = new FormData();
+
     formData.append("nama", nama);
     formData.append("kategori", kategori);
     if (gambar) {
@@ -31,17 +39,17 @@ function AddRecipe() {
     }
     formData.append("bahan", JSON.stringify(bahanArray));
     formData.append("cara", JSON.stringify(caraArray));
-  
-    console.log("📤 Data yang dikirim ke server:", Object.fromEntries(formData.entries()));
-  
+
+    console.log("Data yang dikirim ke server:", Object.fromEntries(formData.entries()));
+
     try {
       const res = await fetch("http://localhost:5000/recipes", {
         method: "POST",
         body: formData,
       });
-  
+
       console.log("📥 Response status:", res.status);
-      
+
       if (!res.ok) {
         let errorMessage = "Gagal menambahkan resep";
         try {
@@ -52,15 +60,14 @@ function AddRecipe() {
         }
         throw new Error(errorMessage);
       }
-  
+
+      // Optionally, you can update a list of recipes or navigate to another page
       navigate("/");
     } catch (err) {
       console.error("❌ Error submit:", err);
       setError(err.message);
     }
   };
-  
-  
 
   return (
     <div className="add-recipe-container">
@@ -90,10 +97,17 @@ function AddRecipe() {
           <input
             type="file"
             accept="image/*"
-            onChange={(e) => setGambar(e.target.files[0])}
+            onChange={handleFileChange}
             required
           />
         </div>
+        {/* Show preview if image selected */}
+        {gambarPreview && (
+          <div className="gambar-preview">
+            <p>Preview Gambar:</p>
+            <img src={gambarPreview} alt="Preview" style={{ maxWidth: "300px" }} />
+          </div>
+        )}
         <div>
           <label>Bahan-bahan (pisahkan tiap baris):</label>
           <textarea
