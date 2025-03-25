@@ -12,7 +12,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Pastikan folder asset ada
-const uploadDir = path.join(__dirname, "src/asset");
+const uploadDir = path.join(__dirname, "../src/asset");
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
@@ -27,7 +27,7 @@ app.use(express.json());
 // Multer storage configuration
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, 'src/asset'));
+    cb(null, path.join(__dirname, '../src/asset'));
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
