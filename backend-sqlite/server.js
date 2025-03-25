@@ -133,7 +133,8 @@ app.post('/recipes', upload.single('gambar'), (req, res) => {
 });
 
 // Serve static assets so images can be accessed from the frontend
-app.use('/src/asset', express.static(path.join(__dirname, 'src/asset')));
+// app.use('/src/asset', express.static(path.join(__dirname, 'src/asset')));
+app.use('/src/asset', express.static(path.join(__dirname, '../src/asset')));
 
 // Start the server
 app.listen(port, () => {

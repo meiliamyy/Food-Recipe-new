@@ -32,13 +32,20 @@ function Detail() {
   if (error) return <div>Error: {error}</div>;
   if (!resep) return <div>Resep tidak ditemukan</div>;
 
+
   return (
     <>
       <header>
         <h1 className="header-recipe">Meilia recipe</h1>
       </header>
       <div className="detail-container">
-        <img src={resep.gambar} alt={resep.nama} className="gambar-detail" />
+        {/* <img src={resep.gambar} alt={resep.nama} className="gambar-detail" /> */}
+        <img
+  src={`http://localhost:5000/${resep.gambar}`}
+  alt={resep.nama}
+  className="gambar-detail"
+/>
+
         <div className="detail-text">
           <h2>{resep.nama}</h2>
           <h3>Bahan-bahan:</h3>
