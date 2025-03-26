@@ -58,14 +58,21 @@ header h1::after {
 
 /* Image Detail */
 .gambar-detail {
-  margin-top: 2rem;
+  /* margin-top: 2rem;
   margin-left: 4rem;
   width: 40%;
   height: 600px;
   border-radius: 8px;
   margin-right: 20px;
-  object-fit: cover;
-}
+  object-fit: cover; */
+    display: block;
+    /* max-width: 100%; */
+    max-width: 400px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto 20px; /* centers the image and adds space below */
+  }
 
 /* h2 with Underline */
 h2 {
@@ -139,16 +146,11 @@ li {
     flex-direction: column;
     padding: 20px;
   }
-  
-  .gambar-detail {
-    width: 100%;
-    height: auto;
-    margin: 0 auto;
-    margin-bottom: 20px;
-  }
+
   
   .detail-text {
     margin-left: 0;
+    width: 400px;
     padding: 0 20px;
   }
   
@@ -177,17 +179,13 @@ li {
     padding: 10px;
   }
   
-  .gambar-detail {
+  /* .gambar-detail {
     width: 100%;
     height: auto;
     margin: 0 auto;
     margin-bottom: 20px;
-  }
+  } */
   
-  .detail-text {
-    margin-left: 0;
-    padding: 0 10px;
-  }
   
   h2 {
     font-size: 1.8em;
@@ -205,7 +203,7 @@ li {
 
 
 .footer-detail {
-  width: 120%;
+  width: 1400px;
   padding: 20px;
   height: fit-content;
   background: linear-gradient(135deg, hsl(0, 0%, 100%), hsl(335, 92%, 85%));
