@@ -135,7 +135,7 @@
 }
 
 /* Recipe Image */
-.gambar-resep {
+/* .gambar-resep {
   width: 60%;
   height: auto;
   transition: transform 0.3s ease-in-out;
@@ -147,7 +147,30 @@
 .grid-item:hover .gambar-resep {
   transform: perspective(1000px) rotateY(-10deg) rotateX(-10deg) scale(1.1);
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+} */
+
+
+
+/* ... other CSS remains unchanged ... */
+
+/* Recipe Image */
+.gambar-resep {
+  width: 60%;
+  /* Enforce square shape */
+  aspect-ratio: 1/1;
+  transition: transform 0.3s ease-in-out;
+  transform: perspective(1000px) rotateY(10deg) rotateX(10deg);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
 }
+
+.grid-item:hover .gambar-resep {
+  transform: perspective(1000px) rotateY(-10deg) rotateX(-10deg) scale(1.1);
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* ... rest of your CSS ... */
+
 
 /* Text Styles */
 p {
