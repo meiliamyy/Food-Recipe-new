@@ -1,6 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-// import resepData from "../data/resepData";
 import "./Detail.css"; // buat file CSS sesuai kebutuhan
 
 function Detail() {
@@ -28,10 +27,26 @@ function Detail() {
       });
   }, [id]);
 
+  const handleDelete = async () => {
+    if (!window.confirm("Apakah Anda yakin ingin menghapus resep ini?")) return;
+
+    try {
+      const res = await fetch(`http://localhost:5000/recipes/${id}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) {
+        throw new Error("Gagal menghapus resep.");
+      }
+      alert("Resep berhasil dihapus");
+      navigate("/");
+    } catch (err) {
+      alert(`Error: ${err.message}`);
+    }
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
   if (!resep) return <div>Resep tidak ditemukan</div>;
-
 
   return (
     <>
@@ -59,9 +74,14 @@ function Detail() {
               <li key={index}>{langkah}</li>
             ))}
           </ol>
+          <div className="button-container">
           <button className="detail-button" onClick={() => navigate("/")}>
             Kembali ke Halaman Utama
           </button>
+          <button className="delete-button" onClick={handleDelete}>
+            Hapus Resep
+          </button>
+          </div>
         </div>
       </div>
       <footer className="footer-detail">

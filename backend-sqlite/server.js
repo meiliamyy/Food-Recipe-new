@@ -140,3 +140,19 @@ app.use('/src/asset', express.static(path.join(__dirname, '../src/asset')));
 app.listen(port, () => {
   console.log(`Server berjalan di port ${port}`);
 });
+
+
+// API 4: Hapus resep berdasarkan ID (DELETE /recipes/:id)
+app.delete('/recipes/:id', (req, res) => {
+  const { id } = req.params;
+  const sql = "DELETE FROM recipes WHERE id = ?";
+
+  db.run(sql, [id], function (err) {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    // Optionally, you can also remove the associated image file here
+    res.json({ message: "Resep berhasil dihapus" });
+  });
+});
+

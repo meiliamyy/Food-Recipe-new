@@ -15,7 +15,6 @@
     linear-gradient(-45deg, transparent 75%, var(--color) 75%);
   background-size: 10px 40px;
   background-position: -50px 0;
-  padding: 20px;
   position: relative;
   z-index: 1;
   height: 100vw;
@@ -294,9 +293,39 @@ button:hover .button-text {
   color: #000000;
   text-align: center;
   font-size: 16px;
-  position: fixed;
+  /* position: fixed; */
   bottom: 0;
   left: 0;
   z-index: 1000;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Existing Dashboard.css styles */
+/* ... your other styles ... */
+
+.add-recipe-button-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0; /* Adjust spacing between the grid and the button */
+}
+
+.add-recipe-button {
+  height: 80px;
+  width: 200px;
+  /* font-size: 10px; */
+  background-color: #c800cb;
+  color: rgb(255, 255, 255);
+  border-radius: 2%;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  
+}
+
+.add-recipe-button:hover {
+  background-color: #c8c8c8;
+  color: #000000;
 }

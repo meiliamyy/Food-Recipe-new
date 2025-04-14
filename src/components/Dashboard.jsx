@@ -26,6 +26,10 @@ function Dashboard() {
       });
   }, []);
 
+  const handleAddRecipe = () => {
+    navigate("/add");
+  };
+
   const handleKlikResep = (id) => {
     navigate(`/detail/${id}`);
   };
@@ -89,6 +93,13 @@ function Dashboard() {
                   </div>
                 ))}
               </div>)}
+
+              {/* Add Recipe Button placed below the grid */}
+      <div className="add-recipe-button-container">
+        <button className="add-recipe-button" onClick={handleAddRecipe}>
+          Tambah Resep Baru
+        </button>
+      </div>
 
 
       <footer className="footer">
