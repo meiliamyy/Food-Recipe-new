@@ -7,7 +7,7 @@ import cors from 'cors';
 import multer from 'multer';
 import fs from "fs";
 
-// Setup __dirname for ES modules
+// Setup __dirname for ES modules\
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
