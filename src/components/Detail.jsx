@@ -27,22 +27,6 @@ function Detail() {
       });
   }, [id]);
 
-  const handleDelete = async () => {
-    if (!window.confirm("Apakah Anda yakin ingin menghapus resep ini?")) return;
-
-    try {
-      const res = await fetch(`http://localhost:5000/recipes/${id}`, {
-        method: "DELETE",
-      });
-      if (!res.ok) {
-        throw new Error("Gagal menghapus resep.");
-      }
-      alert("Resep berhasil dihapus");
-      navigate("/");
-    } catch (err) {
-      alert(`Error: ${err.message}`);
-    }
-  };
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -77,9 +61,6 @@ function Detail() {
           <div className="button-container">
           <button className="detail-button" onClick={() => navigate("/")}>
             Kembali ke Halaman Utama
-          </button>
-          <button className="delete-button" onClick={handleDelete}>
-            Hapus Resep
           </button>
           </div>
         </div>
