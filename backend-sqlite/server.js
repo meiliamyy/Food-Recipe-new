@@ -156,3 +156,28 @@ app.delete('/recipes/:id', (req, res) => {
   });
 });
 
+
+
+
+import('dotenv').config();
+const cloudinary = import('cloudinary').v2;
+
+// Pastikan konfigurasi Cloudinary menggunakan variabel lingkungan
+cloudinary.config({
+  cloud_name: process.env.REACT_APP_CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.REACT_APP_CLOUDINARY_API_KEY,
+  api_secret: process.env.REACT_APP_CLOUDINARY_API_SECRET,
+});
+
+// Fungsi untuk meng-upload gambar
+// const uploadImage = async (filePath) => {
+//   try {
+//     const result = await cloudinary.uploader.upload(filePath, {
+//       folder: 'food-recipes',
+//     });
+//     return result.secure_url;  // Mengembalikan URL gambar yang di-upload
+//   } catch (error) {
+//     console.error('Error uploading image:', error);
+//     throw error;
+//   }
+// };
