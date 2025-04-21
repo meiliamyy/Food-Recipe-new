@@ -6,3 +6,5 @@ status=200
 [build]
   functions = "functions"
   publish   = "frontend/build"
+
+  
