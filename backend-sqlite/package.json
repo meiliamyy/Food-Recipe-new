@@ -1,25 +1,23 @@
 {
   "name": "backend-sqlite",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-
-      "type": "module"
-    
-
+    "type": "module",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
+    "cloudinary": "^2.6.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
     "express": "^4.21.2",
+    "express-fileupload": "^1.5.1",
     "sqlite3": "^5.1.7"
-  }
-  
+  },
+  "description": ""
 }
-
-
-

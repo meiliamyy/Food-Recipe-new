@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 // server.js
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -6,6 +9,10 @@ import sqlite3Module from 'sqlite3';
 import cors from 'cors';
 import multer from 'multer';
 import fs from "fs";
+import fileUpload from 'express-fileupload';
+import { v2 as cloudinary } from 'cloudinary';
+
+
 
 // Setup __dirname for ES modules\
 const __filename = fileURLToPath(import.meta.url);
@@ -18,7 +25,11 @@ if (!fs.existsSync(uploadDir)) {
 }
 
 const app = express();
-const port = 5000;
+const port = 4000;
+
+app.use(cors());
+app.use(express.json());
+app.use(fileUpload());
 
 // Enable CORS and JSON parsing
 app.use(cors());
@@ -159,25 +170,44 @@ app.delete('/recipes/:id', (req, res) => {
 
 
 
-import('dotenv').config();
-const cloudinary = import('cloudinary').v2;
 
-// Pastikan konfigurasi Cloudinary menggunakan variabel lingkungan
-cloudinary.config({
-  cloud_name: process.env.REACT_APP_CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.REACT_APP_CLOUDINARY_API_KEY,
-  api_secret: process.env.REACT_APP_CLOUDINARY_API_SECRET,
-});
+
+// import fileUpload from 'express-fileupload';
+
+// const cloudinary = import('cloudinary').v2;
+
+// cloudinary.config({
+//   cloud_name: process.env.REACT_APP_CLOUDINARY_CLOUD_NAME,
+//   api_key: process.env.REACT_APP_CLOUDINARY_API_KEY,
+//   api_secret: process.env.REACT_APP_CLOUDINARY_API_SECRET,
+// });
 
 // Fungsi untuk meng-upload gambar
-// const uploadImage = async (filePath) => {
-//   try {
-//     const result = await cloudinary.uploader.upload(filePath, {
-//       folder: 'food-recipes',
-//     });
-//     return result.secure_url;  // Mengembalikan URL gambar yang di-upload
-//   } catch (error) {
-//     console.error('Error uploading image:', error);
-//     throw error;
-//   }
-// };
+const uploadImage = async (filePath) => {
+  try {
+    const result = await cloudinary.uploader.upload(filePath, {
+      folder: 'food-recipes',
+    });
+    return result.secure_url;  // Mengembalikan URL gambar yang di-upload
+  } catch (error) {
+    console.error('Error uploading image:', error);
+    throw error;
+  }
+};
+
+
+// Konfigurasi Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// Contoh endpoint
+app.get('/', (req, res) => {
+  res.send('Hello from Food Recipe Backend!');
+});
+
+app.listen(5000, () => {
+  console.log('Server running on http://localhost:5000');
+});
