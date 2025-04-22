@@ -157,17 +157,6 @@ app.delete('/recipes/:id', (req, res) => {
 });
 
 
-import dotenv from 'dotenv';
-dotenv.config();
-import cloudinary from 'cloudinary';
-
-// Pastikan konfigurasi Cloudinary menggunakan variabel lingkungan
-cloudinary.config({
-  cloud_name: process.env.REACT_APP_CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.REACT_APP_CLOUDINARY_API_KEY,
-  api_secret: process.env.REACT_APP_CLOUDINARY_API_SECRET,
-});
-
 
 import fileUpload from "express-fileupload";
 import { uploadImage, uploadStream } from "./cloudinaryConfig.js";
