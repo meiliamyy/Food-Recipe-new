@@ -157,10 +157,9 @@ app.delete('/recipes/:id', (req, res) => {
 });
 
 
-
-
-import('dotenv').config();
-const cloudinary = import('cloudinary').v2;
+import dotenv from 'dotenv';
+dotenv.config();
+import cloudinary from 'cloudinary';
 
 // Pastikan konfigurasi Cloudinary menggunakan variabel lingkungan
 cloudinary.config({
@@ -169,15 +168,32 @@ cloudinary.config({
   api_secret: process.env.REACT_APP_CLOUDINARY_API_SECRET,
 });
 
-// Fungsi untuk meng-upload gambar
-// const uploadImage = async (filePath) => {
-//   try {
-//     const result = await cloudinary.uploader.upload(filePath, {
-//       folder: 'food-recipes',
-//     });
-//     return result.secure_url;  // Mengembalikan URL gambar yang di-upload
-//   } catch (error) {
-//     console.error('Error uploading image:', error);
-//     throw error;
-//   }
-// };
+
+import fileUpload from "express-fileupload";
+import { uploadImage, uploadStream } from "./cloudinaryConfig.js";
+
+// Use the existing app variable
+app.use(fileUpload({ useTempFiles: true }));
+
+// Upload via path
+app.post("/upload/path", async (req, res) => {
+  if (!req.files?.image) return res.status(400).send("No file");
+  try {
+    const url = await uploadImage(req.files.image.tempFilePath);
+    res.json({ url });
+  } catch {
+    res.status(500).json({ error: "Upload failed" });
+  }
+});
+
+// Upload via buffer
+app.post("/upload/buffer", async (req, res) => {
+  if (!req.files?.image) return res.status(400).send("No file");
+  try {
+    const buffer = req.files.image.data;
+    const url    = await uploadStream(buffer);
+    res.json({ url });
+  } catch {
+    res.status(500).json({ error: "Upload failed" });
+  }
+});
